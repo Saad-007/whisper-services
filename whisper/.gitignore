@@ -1,0 +1,7 @@
+temp_audio/
+whisper_models/
+models/
+__pycache__/
+.env
+*.wav
+*.mp3
