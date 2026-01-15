@@ -155,17 +155,22 @@ async def transcribe(
             pass
 
 # =============================
-# START SERVER
+# START SERVER - CRITICAL FOR RENDER
 # =============================
 if __name__ == "__main__":
     import uvicorn
     
+    # Get port from Render environment variable
     port = int(os.environ.get("PORT", 8000))
     
+    print(f"🌐 Starting Uvicorn server on port {port}")
+    print(f"🔧 Host: 0.0.0.0 | Workers: 1 | Model: {MODEL_SIZE}")
+    
+    # CRITICAL: Start the server with these exact parameters
     uvicorn.run(
-        app,
-        host="0.0.0.0",
-        port=port,
+        app,  # Your FastAPI app instance
+        host="0.0.0.0",  # Must be 0.0.0.0 for Render
+        port=port,  # Use PORT environment variable
         workers=1,  # Single worker for free tier
         log_level="info"
     )
